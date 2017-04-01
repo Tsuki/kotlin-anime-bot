@@ -1,0 +1,7 @@
+apply plugin: 'kotlin'
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    compile project(":bot-api")
+    testCompile "junit:junit:4.12"
+}
