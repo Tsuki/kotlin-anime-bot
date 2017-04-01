@@ -15,6 +15,9 @@ class TelegramProperties {
             setProperty(PROP_LAST_ID, lastId.toString())
         })
 
+    val handleUnknown: Boolean
+        get() = readProperties().getProperty(HANDLE_UNKNOWN)?.toBoolean() ?: false
+
     private fun writeProperties(props: Properties) {
         FileOutputStream(file).use { output -> props.store(output, null) }
     }
@@ -33,6 +36,8 @@ class TelegramProperties {
 
 
         val PROP_TOKEN = "token"
+        val HANDLE_UNKNOWN = "handleUnknown"
         val PROP_LAST_ID = "lastId"
     }
+
 }

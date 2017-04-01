@@ -10,7 +10,7 @@ buildscript {
 }
 
 allprojects {
-    group 'org.yanex.telegram'
+    group 'com.sukitsuki.telegram'
     version '1.0-SNAPSHOT'
     
     repositories {
