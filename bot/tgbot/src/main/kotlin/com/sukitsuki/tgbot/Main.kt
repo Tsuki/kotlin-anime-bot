@@ -1,6 +1,7 @@
 package com.sukitsuki.tgbot
 
 import org.yanex.telegram.TelegramBot
+import org.yanex.telegram.TelegramProperties
 import org.yanex.telegram.entities.Message
 import org.yanex.telegram.entities.Update
 import org.yanex.telegram.handler.AbstractUpdateVisitor
