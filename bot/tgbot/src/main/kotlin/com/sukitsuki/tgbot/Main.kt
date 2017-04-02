@@ -6,7 +6,6 @@ import org.yanex.telegram.TelegramPollingBot
 import org.yanex.telegram.TelegramProperties
 import org.yanex.telegram.entities.Message
 import org.yanex.telegram.entities.Update
-import org.yanex.telegram.extention.toStrings
 import org.yanex.telegram.handler.AbstractUpdateVisitor
 import org.yanex.telegram.handler.StopProcessingException
 import org.yanex.telegram.handler.VisitorUpdateHandler
@@ -20,7 +19,7 @@ fun main(args: Array<String>) {
         properties.webHook -> TelegramHoopingBot.create(properties = properties)
         else -> TelegramPollingBot.create(properties = properties)
     }
-    val lastId = bot.listen(properties.lastId, VisitorUpdateHandler(object : AbstractUpdateVisitor() {
+    bot.listen(properties.lastId, VisitorUpdateHandler(object : AbstractUpdateVisitor() {
         override fun visitText(update: Update, message: Message, text: String) = when (text) {
             "ping" -> {
                 sendText(update, "pong"); true
@@ -38,5 +37,4 @@ fun main(args: Array<String>) {
             bot.sendMessage(update.senderId, text).execute()
         }
     }))
-    properties.lastId = lastId
 }
