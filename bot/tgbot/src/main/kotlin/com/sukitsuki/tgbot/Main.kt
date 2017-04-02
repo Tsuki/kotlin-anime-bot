@@ -1,14 +1,14 @@
 package com.sukitsuki.tgbot
 
 import mu.KotlinLogging
-import org.yanex.telegram.TelegramHoopingBot
-import org.yanex.telegram.TelegramPollingBot
-import org.yanex.telegram.TelegramProperties
-import org.yanex.telegram.entities.Message
-import org.yanex.telegram.entities.Update
-import org.yanex.telegram.handler.AbstractUpdateVisitor
-import org.yanex.telegram.handler.StopProcessingException
-import org.yanex.telegram.handler.VisitorUpdateHandler
+import com.sukitsuki.telegram.TelegramHoopingBot
+import com.sukitsuki.telegram.TelegramPollingBot
+import com.sukitsuki.telegram.TelegramProperties
+import com.sukitsuki.telegram.entities.Message
+import com.sukitsuki.telegram.entities.Update
+import com.sukitsuki.telegram.handler.AbstractUpdateVisitor
+import com.sukitsuki.telegram.handler.StopProcessingException
+import com.sukitsuki.telegram.handler.VisitorUpdateHandler
 
 private val logger = KotlinLogging.logger {}
 fun main(args: Array<String>) {
