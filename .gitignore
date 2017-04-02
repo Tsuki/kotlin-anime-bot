@@ -6,3 +6,4 @@
 build/
 /captures
 telegram.properties
+.vertx
