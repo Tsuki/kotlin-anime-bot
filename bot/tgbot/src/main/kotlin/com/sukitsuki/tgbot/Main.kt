@@ -1,6 +1,5 @@
 package com.sukitsuki.tgbot
 
-import mu.KotlinLogging
 import com.sukitsuki.telegram.TelegramHoopingBot
 import com.sukitsuki.telegram.TelegramPollingBot
 import com.sukitsuki.telegram.TelegramProperties
@@ -9,6 +8,7 @@ import com.sukitsuki.telegram.entities.Update
 import com.sukitsuki.telegram.handler.AbstractUpdateVisitor
 import com.sukitsuki.telegram.handler.StopProcessingException
 import com.sukitsuki.telegram.handler.VisitorUpdateHandler
+import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 fun main(args: Array<String>) {
@@ -21,20 +21,24 @@ fun main(args: Array<String>) {
     }
     bot.listen(properties.lastId, VisitorUpdateHandler(object : AbstractUpdateVisitor() {
         override fun visitText(update: Update, message: Message, text: String) = when (text) {
-            "ping" -> {
-                sendText(update, "pong"); true
+            "/ping"  -> {
+                sendText(update, "pong")
             }
             "exit" -> throw StopProcessingException()
             else -> false
         }
 
-        override fun visitUpdate(update: Update) = when {
-            properties.handleUnknown -> sendText(update, "Unknown command. Try 'ping'.")
-            else -> Unit
+        override fun visitUpdate(update: Update): Unit {
+            when {
+                properties.handleUnknown -> sendText(update, "Unknown command. Try 'ping'.")
+                else -> Unit
+            }
+            return Unit
         }
 
-        private fun sendText(update: Update, text: String) {
+        private fun sendText(update: Update, text: String):Boolean {
             bot.sendMessage(update.senderId, text).execute()
+            return true
         }
     }))
 }
