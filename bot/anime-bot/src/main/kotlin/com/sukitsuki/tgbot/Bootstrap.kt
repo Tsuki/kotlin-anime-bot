@@ -7,16 +7,17 @@ import com.sukitsuki.telegram.TelegramProperties
 import com.sukitsuki.telegram.entities.Message
 import com.sukitsuki.telegram.entities.Update
 import com.sukitsuki.telegram.handler.AbstractUpdateVisitor
+import com.sukitsuki.telegram.handler.StopProcessingException
 import com.sukitsuki.telegram.handler.VisitorUpdateHandler
 import com.sukitsuki.tgbot.service.BangumiService
-import io.vertx.ext.web.client.WebClient
+import com.sukitsuki.tgbot.service.requestJson
 import mu.KotlinLogging
+import okhttp3.logging.HttpLoggingInterceptor.Level
 import org.joda.time.DateTime
 import org.joda.time.Period
 import org.joda.time.format.PeriodFormat
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 private val logger = KotlinLogging.logger {}
 fun main(args: Array<String>) {
@@ -24,10 +25,9 @@ fun main(args: Array<String>) {
     val properties = TelegramProperties()
     logger.info { properties }
     val bot = when {
-        properties.webHook -> TelegramHoopingBot.create(properties = properties)
+        properties.webHook -> TelegramHoopingBot.create(properties = properties, logLevel = Level.BASIC)
         else -> TelegramPollingBot.create(properties = properties)
     }
-    val webClient = WebClient.create(bot.vertx)
 
     val adapter = Retrofit.Builder()
             .baseUrl("https://bangumi.moe/api/")
@@ -45,16 +45,20 @@ fun main(args: Array<String>) {
                 "/ping" -> sendText(update, "pong")
 
                 "/anime", "/anime@NatsukiBot" -> {
-                    val execute = bangumiService.recent().execute()
-                    logger.info(execute.body().toString())
-//                    val function: (AsyncResult<HttpResponse<Buffer>>) -> Unit = {
-//                        val response = it.result()
-//                        val json = bot.gson.fromJson(response.bodyAsString(), arrayOf(Recent()).javaClass)
-//                        sendText(update, json.filter { it.showOn == DateTime().dayOfWeek }.toList().joinToString("\n"))
-//                    }
-//                    webClient.getAbs("https://bangumi.moe/api/bangumi/recent").send(function)
+                    val recent = bangumiService.recent().execute().body()
+                    val tagMap = hashMapOf("_ids" to recent.filter { it.showOn == DateTime().dayOfWeek }.map { it.tagId })
+                    val resultList = bangumiService.tag(requestJson(bot.gson.toJson(tagMap))).execute().body()
+                    logger.info(resultList.toString())
+                    replayText(update, resultList.joinToString("\n"))
                 }
-//                "exit" -> throw StopProcessingException()
+
+                "/exit" -> {
+                    if (update.senderId in properties.admin) {
+                        sendText(update, "Bot is closing.....")
+                        throw StopProcessingException()
+                    }
+                    sendText(update, "關你撚事....")
+                }
                 else -> return false
             }
             return true
@@ -67,12 +71,11 @@ fun main(args: Array<String>) {
         }
 
         private fun sendText(update: Update, text: String) {
-            val call = bot.sendMessage(update.senderId, text)
+            bot.sendMessage(update.senderId, text).execute()
         }
 
         private fun replayText(update: Update, text: String) {
-            val call = bot.sendMessage(chatId = update.senderId, text = text, replyToMessageId = update.message?.messageId)
+            bot.sendMessage(update.senderId, text, replyToMessageId = update.message?.messageId).execute()
         }
     }))
-
 }

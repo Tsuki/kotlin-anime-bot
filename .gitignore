@@ -7,3 +7,4 @@ build/
 /captures
 telegram.properties
 .vertx
+Cache
