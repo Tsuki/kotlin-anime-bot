@@ -26,8 +26,5 @@ data class Recent(
         @SerializedName("acgdb_id")
         val acgdbId: String? = null
                  ) {
-    override fun toString(): String {
-        return "$name"
-//        return "Recent(id=$id, name=$name, credit=$credit, startDate=$startDate, endDate=$endDate, showOn=$showOn, tagId=$tagId, icon=$icon, cover=$cover, acgdbId=$acgdbId)"
-    }
+    override fun toString(): String = "$name"
 }

@@ -1,3 +1,3 @@
-include ':bot-api',':tgbot'
+include ':bot-api',':anime-bot'
 
-project(':tgbot').projectDir = new File(rootDir, 'bot/tgbot')
+project(':anime-bot').projectDir = new File(rootDir, 'bot/anime-bot')
