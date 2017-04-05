@@ -1,3 +1,8 @@
+import groovy.xml.MarkupBuilder
+import org.jooq.util.GenerationTool
+
+import static javax.xml.bind.JAXB.unmarshal
+
 apply plugin: 'kotlin'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'net.researchgate.release'
@@ -12,6 +17,8 @@ buildscript {
         }
     }
     dependencies {
+        classpath 'org.jooq:jooq-codegen:3.9.1'
+        classpath 'com.h2database:h2:1.4.177'
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath 'net.researchgate:gradle-release:2.6.0'
@@ -21,11 +28,55 @@ buildscript {
 
 dependencies {
     testCompile "junit:junit:4.12"
+    compile 'org.jooq:jooq:3.9.1'
+    runtime 'com.h2database:h2:1.4.177'
     compile project(":bot-api")
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
     // https://mvnrepository.com/artifact/io.vertx/vertx-rx-java
     compile 'io.vertx:vertx-web-client:3.4.1'
     compile 'io.vertx:vertx-sql-common:3.4.1'
-
 }
+
+
+task generate << {
+    def writer = new StringWriter()
+    def xml = new MarkupBuilder(writer)
+            .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.9.0.xsd') {
+        jdbc() {
+            driver('org.h2.Driver')
+            url('jdbc:h2:~/telegram')
+            user('')
+            password('')
+        }
+        generator() {
+            database() {
+//                inputSchema 'public'
+                includes 'public.*'
+                excludes ''
+            }
+
+            // Watch out for this caveat when using MarkupBuilder with "reserved names"
+            // - http://stackoverflow.com/a/11389034/521799
+            // - https://groups.google.com/forum/#!topic/jooq-user/wi4S9rRxk4A
+            generate([:]) {
+                pojos false
+                daos false
+            }
+            target() {
+                packageName('com.sukitsuki.tgbot.jooq')
+                directory('src/main/java')
+            }
+        }
+    }
+    // Run the code generator
+    // ----------------------
+    GenerationTool.generate(
+            unmarshal(
+                    new StringReader(writer.toString()),
+                    org.jooq.util.jaxb.Configuration.class
+            )
+    )
+}
+
+
