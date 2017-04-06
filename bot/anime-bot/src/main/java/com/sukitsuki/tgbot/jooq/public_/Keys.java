@@ -4,8 +4,10 @@
 package com.sukitsuki.tgbot.jooq.public_;
 
 
-import com.sukitsuki.tgbot.jooq.public_.tables.Chatrecord;
-import com.sukitsuki.tgbot.jooq.public_.tables.records.ChatrecordRecord;
+import com.sukitsuki.tgbot.jooq.public_.tables.Chat;
+import com.sukitsuki.tgbot.jooq.public_.tables.Tag;
+import com.sukitsuki.tgbot.jooq.public_.tables.records.ChatRecord;
+import com.sukitsuki.tgbot.jooq.public_.tables.records.TagRecord;
 
 import javax.annotation.Generated;
 
@@ -32,13 +34,15 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
-    public static final Identity<ChatrecordRecord, Long> IDENTITY_CHATRECORD = Identities0.IDENTITY_CHATRECORD;
+    public static final Identity<ChatRecord, Integer> IDENTITY_CHAT = Identities0.IDENTITY_CHAT;
+    public static final Identity<TagRecord, Integer> IDENTITY_TAG = Identities0.IDENTITY_TAG;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<ChatrecordRecord> CONSTRAINT_BB = UniqueKeys0.CONSTRAINT_BB;
+    public static final UniqueKey<ChatRecord> CONSTRAINT_1 = UniqueKeys0.CONSTRAINT_1;
+    public static final UniqueKey<TagRecord> CONSTRAINT_14 = UniqueKeys0.CONSTRAINT_14;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -50,10 +54,12 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 extends AbstractKeys {
-        public static Identity<ChatrecordRecord, Long> IDENTITY_CHATRECORD = createIdentity(Chatrecord.CHATRECORD, Chatrecord.CHATRECORD.ID);
+        public static Identity<ChatRecord, Integer> IDENTITY_CHAT = createIdentity(Chat.CHAT, Chat.CHAT.ID);
+        public static Identity<TagRecord, Integer> IDENTITY_TAG = createIdentity(Tag.TAG, Tag.TAG.ID);
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
-        public static final UniqueKey<ChatrecordRecord> CONSTRAINT_BB = createUniqueKey(Chatrecord.CHATRECORD, "CONSTRAINT_BB", Chatrecord.CHATRECORD.ID);
+        public static final UniqueKey<ChatRecord> CONSTRAINT_1 = createUniqueKey(Chat.CHAT, "CONSTRAINT_1", Chat.CHAT.ID);
+        public static final UniqueKey<TagRecord> CONSTRAINT_14 = createUniqueKey(Tag.TAG, "CONSTRAINT_14", Tag.TAG.ID);
     }
 }

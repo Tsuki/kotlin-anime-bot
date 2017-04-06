@@ -4,7 +4,8 @@
 package com.sukitsuki.tgbot.jooq.public_;
 
 
-import com.sukitsuki.tgbot.jooq.public_.tables.Chatrecord;
+import com.sukitsuki.tgbot.jooq.public_.tables.Chat;
+import com.sukitsuki.tgbot.jooq.public_.tables.Tag;
 
 import javax.annotation.Generated;
 
@@ -23,7 +24,12 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>PUBLIC.CHATRECORD</code>.
+     * The table <code>PUBLIC.CHAT</code>.
      */
-    public static final Chatrecord CHATRECORD = com.sukitsuki.tgbot.jooq.public_.tables.Chatrecord.CHATRECORD;
+    public static final Chat CHAT = com.sukitsuki.tgbot.jooq.public_.tables.Chat.CHAT;
+
+    /**
+     * The table <code>PUBLIC.TAG</code>.
+     */
+    public static final Tag TAG = com.sukitsuki.tgbot.jooq.public_.tables.Tag.TAG;
 }

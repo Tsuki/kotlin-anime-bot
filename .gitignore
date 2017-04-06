@@ -8,3 +8,4 @@ build/
 telegram.properties
 .vertx
 Cache
+/bot/anime-bot/src/main/resources/hikari.properties

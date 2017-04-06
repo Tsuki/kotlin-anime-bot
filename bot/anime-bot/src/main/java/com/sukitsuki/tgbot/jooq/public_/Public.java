@@ -5,7 +5,8 @@ package com.sukitsuki.tgbot.jooq.public_;
 
 
 import com.sukitsuki.tgbot.jooq.DefaultCatalog;
-import com.sukitsuki.tgbot.jooq.public_.tables.Chatrecord;
+import com.sukitsuki.tgbot.jooq.public_.tables.Chat;
+import com.sukitsuki.tgbot.jooq.public_.tables.Tag;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +33,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -554363026;
+    private static final long serialVersionUID = -1890516358;
 
     /**
      * The reference instance of <code>PUBLIC</code>
@@ -40,9 +41,14 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>PUBLIC.CHATRECORD</code>.
+     * The table <code>PUBLIC.CHAT</code>.
      */
-    public final Chatrecord CHATRECORD = com.sukitsuki.tgbot.jooq.public_.tables.Chatrecord.CHATRECORD;
+    public final Chat CHAT = com.sukitsuki.tgbot.jooq.public_.tables.Chat.CHAT;
+
+    /**
+     * The table <code>PUBLIC.TAG</code>.
+     */
+    public final Tag TAG = com.sukitsuki.tgbot.jooq.public_.tables.Tag.TAG;
 
     /**
      * No further instances allowed
@@ -69,7 +75,8 @@ public class Public extends SchemaImpl {
 
     private final List<Sequence<?>> getSequences0() {
         return Arrays.<Sequence<?>>asList(
-            Sequences.SYSTEM_SEQUENCE_46470562_D2B1_4D58_99B1_BDA8502CF105);
+            Sequences.SYSTEM_SEQUENCE_1A2418EA_9CE7_4880_AFCA_CC289BF6F6C9,
+            Sequences.SYSTEM_SEQUENCE_62E81A94_5029_4514_B434_D015856DA09E);
     }
 
     @Override
@@ -81,6 +88,7 @@ public class Public extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            Chatrecord.CHATRECORD);
+            Chat.CHAT,
+            Tag.TAG);
     }
 }
