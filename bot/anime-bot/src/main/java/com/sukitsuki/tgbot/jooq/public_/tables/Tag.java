@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tag extends TableImpl<TagRecord> {
 
-    private static final long serialVersionUID = 262727911;
+    private static final long serialVersionUID = -911873612;
 
     /**
      * The reference instance of <code>PUBLIC.TAG</code>
@@ -53,12 +53,12 @@ public class Tag extends TableImpl<TagRecord> {
     /**
      * The column <code>PUBLIC.TAG.ID</code>.
      */
-    public final TableField<TagRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1A2418EA_9CE7_4880_AFCA_CC289BF6F6C9)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+    public final TableField<TagRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1E92B028_B915_4E52_AA81_DE5367DBCD7F)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>PUBLIC.TAG.RID</code>.
      */
-    public final TableField<TagRecord, Integer> RID = createField("RID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TagRecord, String> RID = createField("RID", org.jooq.impl.SQLDataType.VARCHAR.length(40).nullable(false), this, "");
 
     /**
      * The column <code>PUBLIC.TAG.ZHTW</code>.

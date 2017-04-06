@@ -22,12 +22,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Chat implements Serializable {
 
-    private static final long serialVersionUID = -944461471;
+    private static final long serialVersionUID = 547930237;
 
     private Integer id;
     private Integer chatid;
     private String  name;
     private String  locale;
+    private String  type;
 
     public Chat() {}
 
@@ -36,18 +37,21 @@ public class Chat implements Serializable {
         this.chatid = value.chatid;
         this.name = value.name;
         this.locale = value.locale;
+        this.type = value.type;
     }
 
     public Chat(
         Integer id,
         Integer chatid,
         String  name,
-        String  locale
+        String  locale,
+        String  type
     ) {
         this.id = id;
         this.chatid = chatid;
         this.name = name;
         this.locale = locale;
+        this.type = type;
     }
 
     public Integer getId() {
@@ -82,6 +86,14 @@ public class Chat implements Serializable {
         this.locale = locale;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Chat (");
@@ -90,6 +102,7 @@ public class Chat implements Serializable {
         sb.append(", ").append(chatid);
         sb.append(", ").append(name);
         sb.append(", ").append(locale);
+        sb.append(", ").append(type);
 
         sb.append(")");
         return sb.toString();

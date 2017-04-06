@@ -22,10 +22,10 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tag implements Serializable {
 
-    private static final long serialVersionUID = 1890688377;
+    private static final long serialVersionUID = 1530221143;
 
     private Integer id;
-    private Integer rid;
+    private String  rid;
     private String  zhtw;
     private String  zhcn;
     private String  en;
@@ -44,7 +44,7 @@ public class Tag implements Serializable {
 
     public Tag(
         Integer id,
-        Integer rid,
+        String  rid,
         String  zhtw,
         String  zhcn,
         String  en,
@@ -66,11 +66,11 @@ public class Tag implements Serializable {
         this.id = id;
     }
 
-    public Integer getRid() {
+    public String getRid() {
         return this.rid;
     }
 
-    public void setRid(Integer rid) {
+    public void setRid(String rid) {
         this.rid = rid;
     }
 

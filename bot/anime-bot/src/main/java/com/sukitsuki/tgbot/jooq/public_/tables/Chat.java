@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Chat extends TableImpl<ChatRecord> {
 
-    private static final long serialVersionUID = 212931258;
+    private static final long serialVersionUID = -528163217;
 
     /**
      * The reference instance of <code>PUBLIC.CHAT</code>
@@ -53,7 +53,7 @@ public class Chat extends TableImpl<ChatRecord> {
     /**
      * The column <code>PUBLIC.CHAT.ID</code>.
      */
-    public final TableField<ChatRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_62E81A94_5029_4514_B434_D015856DA09E)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+    public final TableField<ChatRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_FC277016_5B57_42B6_8242_32BCBAC8CAAA)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>PUBLIC.CHAT.CHATID</code>.
@@ -69,6 +69,11 @@ public class Chat extends TableImpl<ChatRecord> {
      * The column <code>PUBLIC.CHAT.LOCALE</code>.
      */
     public final TableField<ChatRecord, String> LOCALE = createField("LOCALE", org.jooq.impl.SQLDataType.VARCHAR.length(10), this, "");
+
+    /**
+     * The column <code>PUBLIC.CHAT.TYPE</code>.
+     */
+    public final TableField<ChatRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR.length(10), this, "");
 
     /**
      * Create a <code>PUBLIC.CHAT</code> table reference
