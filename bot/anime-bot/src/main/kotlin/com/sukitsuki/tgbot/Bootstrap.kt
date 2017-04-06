@@ -25,9 +25,7 @@ import java.sql.DriverManager
 
 private val logger = KotlinLogging.logger {}
 fun main(args: Array<String>) {
-    val create: DSLContext = DSL.using(DriverManager.getConnection("jdbc:h2:~/telegram"), SQLDialect.H2)
 
-    create.select().from()
     val startTime = DateTime()
     val properties = TelegramProperties()
     logger.info { properties }
